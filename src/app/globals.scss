@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+:root {
+    --color-paper: #f7f4ee;
+    --color-paper-dim: #efe9de;
+    --color-ink: #26231d;
+    --color-ink-soft: #56503f;
+    --color-line: #ddd3bf;
+    --color-ochre: #af6c3a;
+    --color-ochre-dark: #8f5429;
+    --color-sage: #5f6b52;
+}
+
+@theme inline {
+    --color-paper: var(--color-paper);
+    --color-paper-dim: var(--color-paper-dim);
+    --color-ink: var(--color-ink);
+    --color-ink-soft: var(--color-ink-soft);
+    --color-line: var(--color-line);
+    --color-ochre: var(--color-ochre);
+    --color-ochre-dark: var(--color-ochre-dark);
+    --color-sage: var(--color-sage);
+    --font-display: var(--font-patrick-hand);
+    --font-sans: var(--font-inter);
+}
+
+body {
+    // background: var(--color-paper);
+    color: var(--color-ink);
+    background-image: url("/images/bg.jpg");
+    background-size: cover;
+    .main-container {
+        background-color: rgba(255, 255, 255, 0.92);
+    }
+}
+
+::selection {
+    background: var(--color-ochre);
+    color: var(--color-paper);
+}
+
+// @import "~/components/Slider.scss";

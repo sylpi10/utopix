@@ -23,7 +23,7 @@ export async function Footer() {
               <Link
                 key={slug}
                 href={`/${slug}`}
-                className="text-ink-soft transition-colors hover:text-ochre"
+                className="font-display text-ink-soft transition-colors hover:text-ochre"
               >
                 {t(`nav.${slug}`)}
               </Link>
