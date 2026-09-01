@@ -1,0 +1,26 @@
+{
+  "nav": {
+    "home": "Home",
+    "histoire": "History",
+    "construction": "Construction",
+    "exterieur": "Exterior(s)",
+    "interieur": "Interior(s)",
+    "peintures": "Paintings",
+    "sculptures": "Sculptures",
+    "infos": "Infos - Extras",
+    "contact": "Access - Contact"
+  },
+  "home": {
+    "notice": "Utopix is no longer open to the public.",
+    "cta": "Discover the place"
+  },
+  "common": {
+    "gallery": "Gallery",
+    "backHome": "Back to home",
+    "language": "Language",
+    "locationLine": "Sainte-Énimie, Causse de Sauveterre — Lozère, France"
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  }
+}
