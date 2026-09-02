@@ -1,10 +1,10 @@
-@mixin nav-item() {
+@mixin nav-item($width, $color) {
     padding-left: 0;
     margin-left: 0;
     height: 80px;
-    width: 100px !important;
     max-height: 80px;
-    background-color: #fff;
+    width: $width !important;
+    background-color: #f7f4ee;
     display: grid;
     place-items: center;
     align-items: center;
@@ -15,7 +15,7 @@
         inset 3px 3px 3px rgb(255 255 255 / 0.5);
     text-shadow: 1px 1px 1px rgb(0 0 0 / 0.5);
     transition: all 0.6s;
-    border: solid 5px #8f5429;
+    border: solid 5px $color;
 
     &:nth-child(1) {
         border-radius: 85% 31% 66% 53% / 55% 50% 49% 47%;
@@ -67,5 +67,10 @@
     }
     a {
         padding: 12px;
+        // background-color: red;
+        width: stretch;
+        height: stretch;
+        display: grid;
+        place-items: center;
     }
 }

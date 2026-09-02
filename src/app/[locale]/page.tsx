@@ -36,15 +36,19 @@ export default async function HomePage({
         <div className="home-page">
             <section className="main-section relative">
                 {heroImages.length > 0 ? (
-                    <Slider images={heroImages} priority />
+                    <Slider
+                        images={heroImages}
+                        priority
+                        eagerCount={heroImages.length}
+                    />
                 ) : (
                     <div className="aspect-[4/3] w-full bg-paper-dim md:aspect-[16/9]" />
                 )}
                 <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center bg-ink/25 px-6 text-center">
-                    <h1 className="font-display text-4xl tracking-[0.2em] text-paper md:text-6xl">
+                    <h1 className="font-display text-4xl tracking-[0.2em] text-paper main-title">
                         UTOPIX
                     </h1>
-                    <p className="mt-4 max-w-md text-sm text-paper/90 md:text-base">
+                    <p className="mt-4 max-w-md text-sm text-paper/90 md:text-base main-subtitle">
                         {t("common.locationLine")}
                     </p>
                 </div>
