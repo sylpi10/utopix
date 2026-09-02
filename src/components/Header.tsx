@@ -25,7 +25,7 @@ export async function Header() {
 
     return (
         <header className="site-header z-50 border-b border-line bg-paper/90 backdrop-blur">
-            <div className="mx-auto flex max-w-6xl items-center justify-between px-6">
+            <div className="mx-auto flex items-center justify-between px-6">
                 <Link
                     href="/"
                     className="font-display text-xl tracking-[0.15em] text-ink logo"

@@ -1,0 +1,107 @@
+@import "navitem";
+@mixin on-circle($item-count, $circle-size, $item-size) {
+    // position: relative;
+    width: $circle-size;
+    height: $circle-size;
+    // border-radius: 50%;
+    padding: 0;
+    list-style: none;
+
+    > * {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 40%;
+        // margin: -($item-size / 2);
+        width: $item-size;
+        height: $item-size;
+        $angle: (360 / $item-count);
+        $rot: 0;
+        @for $i from 1 through $item-count {
+            &:nth-of-type(#{$i}) {
+                transform: rotate($rot * 1deg)
+                    translate($circle-size / 2)
+                    rotate($rot * -1deg);
+            }
+
+            $rot: $rot + $angle;
+        }
+    }
+}
+
+.home-page {
+    header {
+        background-color: transparent;
+        top: 0;
+        right: 0;
+        left: 0;
+        .logo {
+            box-sizing: border-box;
+            width: stretch;
+            height: stretch;
+            background-color: #fff;
+            border-radius: 60% 31% 66% 91% / 98% 103% 52% 64%;
+            height: 46px;
+            margin: 4px 0;
+            width: fit-content;
+            padding: 4px 10px;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        .nav-list {
+            height: fit-content;
+            position: absolute;
+            transform: translateY(20%);
+            margin-left: -80px;
+            padding-left: 0;
+            list-style-type: none;
+            @include on-circle(
+                $item-count: 8,
+                $circle-size: 520px,
+                $item-size: 80px
+            );
+            li {
+                @include nav-item;
+            }
+        }
+    }
+    .slider {
+        top: -50px;
+        height: calc(100vh - 50px);
+    }
+    .main-section {
+        height: calc(100vh - 50px);
+        // overflow: hidden;
+        .slider-container {
+            overflow: hidden;
+            height: calc(100vh);
+        }
+    }
+    &.scrolled {
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            nav .nav-list {
+                position: relative;
+                height: 100px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-left: 0;
+                top: 0;
+                transform: unset;
+                li {
+                    transform: unset;
+                    position: relative;
+                    top: 0;
+                    left: unset;
+                }
+            }
+        }
+    }
+}

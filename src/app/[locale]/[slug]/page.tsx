@@ -36,7 +36,7 @@ export default async function SectionPage({
         .filter(Boolean);
 
     return (
-        <article className={page.slug}>
+        <article className={`${page.slug} article`}>
             {images.length > 0 && (
                 <section className="border-b border-line">
                     <Slider images={images} priority />
