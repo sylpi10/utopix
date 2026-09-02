@@ -5,6 +5,8 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { BodyClassSync } from "@/components/BodyClassSync";
+import { getPageBySlug, getSectionCards } from "@/lib/pages";
 import "../globals.scss";
 
 const patrickHand = Patrick_Hand({
@@ -43,6 +45,7 @@ export default async function LocaleLayout({
                 className={`${patrickHand.variable} ${inter.variable} font-sans antialiased`}
             >
                 <NextIntlClientProvider>
+                    <BodyClassSync />
                     <div className="flex min-h-screen flex-col main-container">
                         <Header />
                         <main className="flex-1">{children}</main>

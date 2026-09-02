@@ -1,5 +1,35 @@
 @import "tailwindcss";
 
+@mixin on-circle($item-count, $circle-size, $item-size) {
+    // position: relative;
+    width: $circle-size;
+    height: $circle-size;
+    // border-radius: 50%;
+    padding: 0;
+    list-style: none;
+
+    > * {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 40%;
+        // margin: -($item-size / 2);
+        width: $item-size;
+        height: $item-size;
+        $angle: (360 / $item-count);
+        $rot: 0;
+        @for $i from 1 through $item-count {
+            &:nth-of-type(#{$i}) {
+                transform: rotate($rot * 1deg)
+                    translate($circle-size / 2)
+                    rotate($rot * -1deg);
+            }
+
+            $rot: $rot + $angle;
+        }
+    }
+}
+
 :root {
     --color-paper: #f7f4ee;
     --color-paper-dim: #efe9de;
@@ -31,6 +61,126 @@ body {
     background-size: cover;
     .main-container {
         background-color: rgba(255, 255, 255, 0.92);
+    }
+}
+
+.home-page {
+    header {
+        background-color: transparent;
+        top: 0;
+        right: 0;
+        left: 0;
+        .logo {
+            box-sizing: border-box;
+            width: stretch;
+            height: stretch;
+            background-color: #fff;
+            border-radius: 60% 31% 66% 53% / 55% 40% 49% 47%;
+            height: 50px;
+            width: fit-content;
+            padding: 0 12px;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        .nav-list {
+            height: fit-content;
+            position: absolute;
+            transform: translateY(27%);
+            margin-left: -80px;
+            padding-left: 0;
+            list-style-type: none;
+            @include on-circle(
+                $item-count: 8,
+                $circle-size: 500px,
+                $item-size: 80px
+            );
+            li {
+                padding-left: 0;
+                margin-left: 0;
+                height: 80px;
+                width: 100px !important;
+                max-height: 80px;
+                background-color: #fff;
+                display: grid;
+                place-items: center;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                box-shadow:
+                    2px 0px 2px rgb(0 0 0 / 0.5),
+                    inset 3px 3px 3px rgb(255 255 255 / 0.5);
+                text-shadow: 1px 1px 1px rgb(0 0 0 / 0.5);
+                transition: all 0.6s;
+                border: solid 5px #8f5429;
+
+                &:nth-child(1) {
+                    border-radius: 85% 31% 66% 53% / 55% 50% 49% 47%;
+                    &:hover {
+                        border-radius: 31% 85% 53% 66% / 50% 49% 47% 55% !important;
+                    }
+                }
+                &:nth-child(2) {
+                    border-radius: 31% 85% 53% 66% / 50% 49% 47% 55%;
+                    &:hover {
+                        border-radius: 85% 31% 66% 53% / 55% 50% 49% 47% !important;
+                    }
+                }
+                &:nth-child(3) {
+                    border-radius: 53% 66% 31% 85% / 47% 55% 50% 49%;
+                    &:hover {
+                        border-radius: 65% 81% 68% 52% / 55% 20% 49% 47% !important;
+                    }
+                }
+                &:nth-child(4) {
+                    border-radius: 66% 53% 85% 31% / 47% 55% 50% 49%;
+                    &:hover {
+                        border-radius: 65% 41% 29% 83% / 45% 40% 49% 57% !important;
+                    }
+                }
+                &:nth-child(5) {
+                    border-radius: 85% 31% 66% 53% / 55% 50% 49% 47%;
+                    &:hover {
+                        border-radius: 55% 41% 29% 83% / 45% 50% 49% 57% !important;
+                    }
+                }
+                &:nth-child(6) {
+                    border-radius: 31% 85% 53% 66% / 50% 49% 47% 55%;
+                    &:hover {
+                        border-radius: 45% 41% 29% 66% / 45% 29% 53% 52% !important;
+                    }
+                }
+                &:nth-child(7) {
+                    border-radius: 53% 66% 31% 85% / 47% 55% 50% 49%;
+                    &:hover {
+                        border-radius: 58% 37% 54% 23% / 58% 42% 65% 37% !important;
+                    }
+                }
+                &:nth-child(8) {
+                    border-radius: 66% 53% 85% 31% / 47% 55% 50% 49%;
+                    &:hover {
+                        border-radius: 65% 41% 29% 83% / 45% 40% 49% 57% !important;
+                    }
+                }
+                a {
+                    padding: 12px;
+                }
+            }
+        }
+    }
+    .slider {
+        top: -50px;
+        height: calc(100vh - 50px);
+    }
+    .main-section {
+        height: calc(100vh - 50px);
+        // overflow: hidden;
+        .slider-container {
+            overflow: hidden;
+            height: calc(100vh);
+        }
     }
 }
 

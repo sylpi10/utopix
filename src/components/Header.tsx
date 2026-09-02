@@ -9,7 +9,7 @@ export async function Header() {
     const t = await getTranslations("nav");
 
     const navLinks = (
-        <ul className="flex flex-col gap-5 text-base md:flex-row md:items-center md:gap-8 md:text-sm">
+        <ul className="nav-list flex flex-col gap-5 text-base md:flex-row md:items-center md:gap-8 md:text-sm">
             {PAGE_SLUGS.map((slug) => (
                 <li key={slug}>
                     <Link
@@ -24,17 +24,17 @@ export async function Header() {
     );
 
     return (
-        <header className="sticky top-0 z-50 border-b border-line bg-paper/90 backdrop-blur">
-            <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
+        <header className="site-header z-50 border-b border-line bg-paper/90 backdrop-blur">
+            <div className="mx-auto flex max-w-6xl items-center justify-between px-6">
                 <Link
                     href="/"
-                    className="font-display text-xl tracking-[0.15em] text-ink"
+                    className="font-display text-xl tracking-[0.15em] text-ink logo"
                 >
-                    <Image src={logoImg} alt="" width={120} height={100} />
+                    <Image src={logoImg} alt="logo" width={120} height={100} />
                     {/*UTOPIX*/}
                 </Link>
 
-                <nav className="hidden md:block">{navLinks}</nav>
+                <nav className="nav">{navLinks}</nav>
 
                 <div className="flex items-center gap-6">
                     <div className="hidden md:block">

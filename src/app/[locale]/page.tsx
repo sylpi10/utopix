@@ -33,8 +33,8 @@ export default async function HomePage({
         .filter(Boolean);
 
     return (
-        <div>
-            <section className="relative">
+        <div className="home-page">
+            <section className="main-section relative">
                 {heroImages.length > 0 ? (
                     <Slider images={heroImages} priority />
                 ) : (

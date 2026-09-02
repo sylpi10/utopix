@@ -41,7 +41,7 @@ export function Slider({
     return (
         <div className="relative slider">
             <div className="overflow-hidden" ref={emblaRef}>
-                <div className="flex">
+                <div className="flex slider-container">
                     {images.map((img, i) => (
                         <div
                             key={img.id}
