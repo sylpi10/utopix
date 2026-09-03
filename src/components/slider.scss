@@ -1,8 +1,22 @@
 .slider {
     // width: 84%;
     margin: auto;
+    .overflow-hidden {
+        border-radius: 5% 19% 9% 10% / 55% 8% 70% 14%;
+        margin-bottom: 16px;
+        border: solid 3px rgba(175, 108, 58, 0.08);
+        @media (max-width: 768px) {
+            border-radius: 5px 25px / 20px 44px;
+        }
+    }
     .flex.slider-container {
-        height: calc(100vh - 80px);
+        @media (min-width: 768px) {
+            height: calc(100vh - 80px);
+        }
+        // height: calc(100vh - 80px);
+        .relative {
+            background-color: rgba(175, 108, 58, 0.04);
+        }
     }
 }
 
@@ -11,6 +25,9 @@
         width: 100%;
         margin: 0;
         height: 100vh;
+        .overflow-hidden {
+            border-radius: 0;
+        }
         .flex.slider-container {
             height: 100vh;
         }

@@ -4,8 +4,9 @@ import { getPageBySlug } from "@/lib/pages";
 import { PAGE_SLUGS } from "@/lib/page-slugs";
 import { Slider } from "@/components/Slider";
 import Image from "next/image";
-import { sanitizeHtml } from "@/lib/sanitize";
+import { renderContentHtml } from "@/lib/sanitize";
 import { ContactForm } from "@/components/ContactForm";
+import { log } from "node:console";
 
 export const dynamic = "force-dynamic";
 
@@ -34,30 +35,23 @@ export default async function SectionPage({
     }));
 
     const isContactPage = slug === "contact";
-    const paragraphs = page.content
-        .split(/\n{2,}/)
-        .map((p) => p.trim())
-        .filter(Boolean);
+    const contentHtml = renderContentHtml(page.content);
 
     return (
         <article className={`${page.slug} article`}>
-            <div className={`mx-10 px-6 py-14 content-wrapper`}>
+            <div
+                className={`sm:mx-4 md:mx-6 lg:mx-10 my-5 px-6 py-14 content-container`}
+            >
                 <h1 className="font-display text-3xl text-ink md:text-4xl">
                     {page.title}
                 </h1>
                 <div
-                    className={`content-wrapper ${isContactPage ? "contact-wrapper flex align-center gap-8" : ""}`}
+                    className={`content-wrapper ${page.slug}-wrapper ${isContactPage ? "flex align-center gap-8" : ""}`}
                 >
-                    <div className="mt-8 space-y-5 text-[15px] leading-relaxed text-ink-soft">
-                        {paragraphs.map((div, i) => (
-                            <div
-                                key={i}
-                                dangerouslySetInnerHTML={{
-                                    __html: sanitizeHtml(div),
-                                }}
-                            />
-                        ))}
-                    </div>
+                    <div
+                        className={`mt-8 space-y-5 text-[15px] leading-relaxed text-ink-soft ${page.slug}-content`}
+                        dangerouslySetInnerHTML={{ __html: contentHtml }}
+                    />
                     {slug === "contact" && (
                         <div>
                             <iframe

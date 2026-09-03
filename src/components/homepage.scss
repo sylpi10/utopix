@@ -31,10 +31,10 @@
     header {
         background: radial-gradient(
             circle at 31% 22%,
-            rgba(255, 255, 255, 0.29) 0%,
-            rgba(255, 255, 255, 0.1) 25%,
-            rgba(255, 255, 255, 0.35) 58%,
-            rgba(255, 255, 255, 0.28) 100%
+            rgba(255, 255, 255, 0.8) 0%,
+            rgba(255, 255, 255, 0.7) 25%,
+            rgba(255, 255, 255, 0.65) 58%,
+            rgba(255, 255, 255, 0.38) 100%
         );
         // backdrop-filter creates a new containing block for `position: fixed`
         // descendants, so .nav-list below would center on the header's own
@@ -45,18 +45,14 @@
         left: 0;
         .logo {
             box-sizing: border-box;
-            width: stretch;
-            height: stretch;
-            background-color: rgba(255, 255, 255, 0.4);
+            // background-color: rgba(255, 255, 255, 0.4);
             // border: 1px solid rgba(255, 255, 255, 0.4);
             // backdrop-filter: blur(5px);
-            box-shadow: inset 4px 2px 4px rgba(255, 255, 255, 0.6);
+            // box-shadow: inset 4px 2px 4px rgba(255, 255, 255, 0.6);
             // border-radius: 60% 31% 66% 91% / 98% 103% 52% 64%;
-            border-radius: 89% 40% 66% 139% / 121% 68% 146% 75%;
-            height: 40px;
-            margin: 4px 0;
-            width: fit-content;
-            padding: 4px 10px;
+            // border-radius: 89% 40% 66% 139% / 121% 68% 146% 75%;
+            // height: fit-content;
+            // width: fit-content;
         }
         nav {
             display: flex;
@@ -77,6 +73,8 @@
             );
             li {
                 @include nav-item(100px, #8f5429);
+                border-width: 5px;
+                font-weight: bold;
             }
         }
     }
@@ -121,6 +119,8 @@
                         top: 0;
                         left: unset;
                         height: 60px;
+                        font-weight: normal;
+                        border-width: 3px;
                         a {
                             padding: 3px 10px;
                         }

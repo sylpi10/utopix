@@ -5,7 +5,7 @@ import { getPageBySlug, getSectionCards } from "@/lib/pages";
 import { HOME_SLUG } from "@/lib/page-slugs";
 import { Slider } from "@/components/Slider";
 import { RoughCircleFrame } from "@/components/RoughCircleFrame";
-import { sanitizeHtml } from "@/lib/sanitize";
+import { renderContentHtml } from "@/lib/sanitize";
 
 export const dynamic = "force-dynamic";
 
@@ -28,10 +28,7 @@ export default async function HomePage({
             alt: (locale === "fr" ? img.altFr : img.altEn) ?? "",
         })) ?? [];
 
-    const paragraphs = (home?.content ?? "")
-        .split(/\n{2,}/)
-        .map((p) => p.trim())
-        .filter(Boolean);
+    const contentHtml = renderContentHtml(home?.content ?? "");
 
     return (
         <div className="home-page">
@@ -63,18 +60,17 @@ export default async function HomePage({
                 </p>
             </div>
 
-            {paragraphs.length > 0 && (
+            {contentHtml && (
                 <section className="mx-auto max-w-2xl px-6 py-12">
                     {home?.title && (
                         <h2 className="font-display text-2xl text-ink">
                             {home.title}
                         </h2>
                     )}
-                    <div className="mt-6 space-y-5 text-[15px] leading-relaxed text-ink-soft">
-                        {paragraphs.map((p, i) => (
-                            <p key={i} dangerouslySetInnerHTML={{ __html: sanitizeHtml(p) }} />
-                        ))}
-                    </div>
+                    <div
+                        className="mt-6 space-y-5 text-[15px] leading-relaxed text-ink-soft"
+                        dangerouslySetInnerHTML={{ __html: contentHtml }}
+                    />
                 </section>
             )}
 

@@ -4,7 +4,8 @@ import { PAGE_SLUGS } from "@/lib/page-slugs";
 import { LanguageSwitch } from "./LanguageSwitch";
 import { MobileMenuToggle } from "./MobileMenuToggle";
 import Image from "next/image";
-import logoImg from "./logo.webp";
+// import logoImg from "./logo.webp";
+import logoImg from "./logo-ochre-dark.webp";
 export async function Header() {
     const t = await getTranslations("nav");
 
@@ -30,7 +31,12 @@ export async function Header() {
                     href="/"
                     className="font-display text-xl tracking-[0.15em] text-ink logo"
                 >
-                    <Image src={logoImg} alt="logo" width={120} height={100} />
+                    <Image
+                        src={logoImg}
+                        alt="logo utopix"
+                        width={136}
+                        height={100}
+                    />
                     {/*UTOPIX*/}
                 </Link>
 

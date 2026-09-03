@@ -6,7 +6,6 @@ import { routing } from "@/i18n/routing";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { BodyClassSync } from "@/components/BodyClassSync";
-import { getPageBySlug, getSectionCards } from "@/lib/pages";
 import "../globals.scss";
 
 const patrickHand = Patrick_Hand({
