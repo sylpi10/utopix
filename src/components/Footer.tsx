@@ -15,7 +15,7 @@ export async function Footer() {
               UTOPIX
             </p>
             <p className="mt-2 max-w-xs text-sm text-ink-soft">
-              {t("common.locationLine")}
+              {t.rich("common.locationLine", { br: () => <br /> })}
             </p>
           </div>
           <nav className="grid grid-cols-2 gap-x-8 gap-y-2 text-sm md:grid-cols-1">

@@ -1,26 +1,26 @@
 {
-  "nav": {
-    "home": "Accueil",
-    "histoire": "Histoire",
-    "construction": "Construction",
-    "exterieur": "Extérieur(s)",
-    "interieur": "Intérieur(s)",
-    "peintures": "Peintures",
-    "sculptures": "Sculptures",
-    "infos": "Infos - Extras",
-    "contact": "Accès - Contact"
-  },
-  "home": {
-    "notice": "Utopix n'est plus ouvert au public.",
-    "cta": "Découvrir le lieu"
-  },
-  "common": {
-    "gallery": "Galerie",
-    "backHome": "Retour à l'accueil",
-    "language": "Langue",
-    "locationLine": "Sainte-Énimie, Causse de Sauveterre — Lozère"
-  },
-  "footer": {
-    "rights": "Tous droits réservés."
-  }
+    "nav": {
+        "home": "Accueil",
+        "histoire": "Histoire",
+        "construction": "Construction",
+        "exterieur": "Extérieur(s)",
+        "interieur": "Intérieur(s)",
+        "peintures": "Peintures",
+        "sculptures": "Sculptures",
+        "infos": "Infos - Extras",
+        "contact": "Accès - Contact"
+    },
+    "home": {
+        "notice": "Utopix n'est plus ouvert au public.",
+        "cta": "Découvrir le lieu"
+    },
+    "common": {
+        "gallery": "Galerie",
+        "backHome": "Retour à l'accueil",
+        "language": "Langue",
+        "locationLine": "Sainte-Énimie, Causse de Sauveterre <br></br> Lozère"
+    },
+    "footer": {
+        "rights": "Tous droits réservés."
+    }
 }

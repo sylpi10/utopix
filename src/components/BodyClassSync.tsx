@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { usePathname } from "@/i18n/navigation";
 
-const FALLBACK_THRESHOLD = 450;
+const FALLBACK_THRESHOLD = 350;
 
 // Toggles a `home-page` class on <body> so global CSS (globals.scss) can
 // target the home page specifically, e.g. `body.home-page .site-header { ... }`.
@@ -27,7 +27,8 @@ export function BodyClassSync() {
         // causing the stutter.
         let threshold = FALLBACK_THRESHOLD;
         const measure = () => {
-            const el = document.querySelector<HTMLElement>(".home-presentation");
+            const el =
+                document.querySelector<HTMLElement>(".home-presentation");
             threshold = el ? el.offsetTop : FALLBACK_THRESHOLD;
         };
 

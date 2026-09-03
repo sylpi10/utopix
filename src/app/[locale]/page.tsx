@@ -49,7 +49,9 @@ export default async function HomePage({
                         UTOPIX
                     </h1>
                     <p className="mt-4 max-w-md text-sm text-paper/90 md:text-base main-subtitle">
-                        {t("common.locationLine")}
+                        {t.rich("common.locationLine", {
+                            br: () => <br />,
+                        })}
                     </p>
                 </div>
             </section>
