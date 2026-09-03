@@ -1,5 +1,5 @@
+@use "sass:list";
 @import "navitem";
-
 @mixin on-circle($item-count, $radius, $item-size) {
     width: calc(#{$radius} * 2);
     height: calc(#{$radius} * 2);
@@ -27,6 +27,36 @@
     }
 }
 
+// Each shape is 8 plain numbers (percent values, no unit): the 4 horizontal
+// radii, then the 4 vertical radii — same order as CSS border-radius's
+// "a b c d / e f g h" shorthand. Kept as numbers (not pre-built strings) so
+// radius-str() below can shift every corner by a few percent for the hover
+// state without breaking the "/" separator or the value count.
+$shapes: (
+    (45, 49, 49, 30, 49, 38, 70, 44),
+    (35, 69, 41, 22, 44, 44, 64, 62),
+    (51, 38, 45, 38, 58, 51, 68, 35),
+    (38, 34, 32, 30, 38, 48, 44, 35),
+    (54, 29, 48, 48, 28, 42, 65, 32),
+    (24, 35, 47, 54, 45, 42, 50, 24),
+    (35, 39, 59, 20, 29, 18, 40, 24),
+    (42, 42, 24, 36, 49, 36, 60, 54)
+);
+
+// Builds a valid border-radius value from a shape, offsetting every corner
+// by $offset percentage points (0 = the resting shape, e.g. 3 = the hover
+// shape, barely different from the resting one).
+@function radius-str($shape, $offset: 0) {
+    $out: "";
+    @for $i from 1 through 8 {
+        $out: $out + (list.nth($shape, $i) + $offset) + "% ";
+        @if $i == 4 {
+            $out: $out + "/ ";
+        }
+    }
+    @return $out;
+}
+
 .home-page {
     header {
         background: radial-gradient(
@@ -43,17 +73,6 @@
         top: 0;
         right: 0;
         left: 0;
-        .logo {
-            box-sizing: border-box;
-            // background-color: rgba(255, 255, 255, 0.4);
-            // border: 1px solid rgba(255, 255, 255, 0.4);
-            // backdrop-filter: blur(5px);
-            // box-shadow: inset 4px 2px 4px rgba(255, 255, 255, 0.6);
-            // border-radius: 60% 31% 66% 91% / 98% 103% 52% 64%;
-            // border-radius: 89% 40% 66% 139% / 121% 68% 146% 75%;
-            // height: fit-content;
-            // width: fit-content;
-        }
         nav {
             display: flex;
             justify-content: center;
@@ -68,7 +87,7 @@
             list-style-type: none;
             @include on-circle(
                 $item-count: 8,
-                $radius: clamp(200px, 27vw, 260px),
+                $radius: clamp(200px, 27vw, 250px),
                 $item-size: clamp(56px, 8vw, 80px)
             );
             li {
@@ -123,6 +142,38 @@
                         border-width: 3px;
                         a {
                             padding: 3px 10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    h2 {
+        font-size: clamp(1.8rem, 3vw, 2.2rem);
+        background-color: var(--color-sage);
+        width: fit-content;
+        padding: 12px 24px;
+        color: #fff;
+        border-radius: 30% 22% 40% 8% / 35% 45% 20% 50%;
+    }
+    .categories-wrapper {
+        a.group {
+            width: 210px;
+            @for $i from 1 through list.length($shapes) {
+                &:nth-child(#{$i}) {
+                    .category-bubble {
+                        width: 200px;
+                        height: 200px;
+                        border-radius: #{radius-str(list.nth($shapes, $i))};
+                        border: solid 6px #5f6b52;
+                        padding: 0;
+                        transition: all 0.3s ease-in-out;
+                        &:hover {
+                            border-radius: #{radius-str(
+                                    list.nth($shapes, $i),
+                                    42
+                                )};
                         }
                     }
                 }

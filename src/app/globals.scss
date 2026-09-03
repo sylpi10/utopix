@@ -113,7 +113,7 @@ body {
                 grid-template-columns: 1fr 1fr;
                 width: 100%;
                 gap: 0 22px;
-                @media (max-width: 90px) {
+                @media (max-width: 900px) {
                     grid-template-columns: 1fr;
                 }
                 .head {
@@ -123,6 +123,22 @@ body {
                 .para p {
                     margin: 14px 0;
                 }
+            }
+            &.contact-wrapper {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 14px 22px;
+                @media (max-width: 1180px) {
+                    grid-template-columns: 1fr;
+                }
+            }
+            .warning {
+                background-color: #ff9e99;
+                padding: 14px;
+                border: solid 1px #7a3734;
+                color: #7a3734;
+                font-weight: bold;
+                border-radius: 12px;
             }
         }
     }

@@ -6,6 +6,7 @@ import { HOME_SLUG } from "@/lib/page-slugs";
 import { Slider } from "@/components/Slider";
 import { RoughCircleFrame } from "@/components/RoughCircleFrame";
 import { renderContentHtml } from "@/lib/sanitize";
+import Image from "next/image";
 
 export const dynamic = "force-dynamic";
 
@@ -63,9 +64,7 @@ export default async function HomePage({
             {contentHtml && (
                 <section className="mx-auto max-w-2xl px-6 py-12">
                     {home?.title && (
-                        <h2 className="font-display text-2xl text-ink">
-                            {home.title}
-                        </h2>
+                        <h2 className="font-display text-2xl">{home.title}</h2>
                     )}
                     <div
                         className="mt-6 space-y-5 text-[15px] leading-relaxed text-ink-soft"
@@ -74,16 +73,27 @@ export default async function HomePage({
                 </section>
             )}
 
-            <section className="mx-auto max-w-6xl px-6 py-12">
+            <section className="categories-wrapper mx-auto max-w-6xl px-6 py-12">
                 <div className="flex flex-wrap justify-center gap-x-10 gap-y-12">
                     {cards.map((card) =>
                         card.cover ? (
                             <Link
                                 key={card.slug}
                                 href={`/${card.slug}`}
-                                className="group flex flex-col items-center text-center transition-transform duration-300 hover:-translate-y-1"
+                                className="group flex flex-col items-center text-center"
                             >
-                                <RoughCircleFrame
+                                <Image
+                                    src={card.cover.url}
+                                    alt={
+                                        (locale === "fr"
+                                            ? card.cover.altFr
+                                            : card.cover.altEn) ?? card.title
+                                    }
+                                    width={200}
+                                    height={200}
+                                    className="object-cover category-bubble"
+                                />
+                                {/*<RoughCircleFrame
                                     src={card.cover.url}
                                     alt={
                                         (locale === "fr"
@@ -91,7 +101,7 @@ export default async function HomePage({
                                             : card.cover.altEn) ?? card.title
                                     }
                                     size={168}
-                                />
+                                />*/}
                                 <p className="mt-3 font-display text-xl text-ink">
                                     {card.title}
                                 </p>

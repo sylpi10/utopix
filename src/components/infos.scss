@@ -46,12 +46,11 @@ body .article {
             height: fit-content;
             border-width: 0px;
             // background-color: rgba(175, 108, 58, 0.1);
-            background-color: var(--color-ochre);
-            background-color: var(--color-sage);
             color: #fff;
             box-shadow: none;
             &:not(:has(a)) {
                 padding: 24px;
+                background-color: var(--color-sage);
             }
             @for $i from 1 through length($shapes) {
                 &:nth-child(#{$i}) {
@@ -60,6 +59,7 @@ body .article {
             }
             overflow: hidden;
             a {
+                background-color: var(--color-ochre);
                 padding: 24px;
                 width: stretch;
                 height: stretch;
@@ -67,7 +67,7 @@ body .article {
                 position: relative;
                 transition: ease 0.3s;
                 &:hover {
-                    background-color: rgba(175, 108, 58, 0.4);
+                    background-color: var(--color-ochre-dark);
                 }
             }
         }
