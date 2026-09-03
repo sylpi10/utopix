@@ -1,6 +1,9 @@
 .slider {
     // width: 84%;
     margin: auto;
+    .flex.slider-container {
+        height: calc(100vh - 80px);
+    }
 }
 
 .home-page {
@@ -8,18 +11,11 @@
         width: 100%;
         margin: 0;
         height: 100vh;
-        // corner-shape: round;
-        // corner-shape: bevel;
-        // corner-shape: scoop;
-        // corner-shape: squircle;
+        .flex.slider-container {
+            height: 100vh;
+        }
         .object-contain {
             object-fit: cover;
-            // border-radius: 60px !important;
-            // corner-shape: squircle;
-            // corner-shape: round;
-            // corner-shape: bevel;
-            // corner-shape: scoop;
-            // corner-shape: squircle;
         }
     }
 }

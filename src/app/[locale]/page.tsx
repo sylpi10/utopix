@@ -5,6 +5,7 @@ import { getPageBySlug, getSectionCards } from "@/lib/pages";
 import { HOME_SLUG } from "@/lib/page-slugs";
 import { Slider } from "@/components/Slider";
 import { RoughCircleFrame } from "@/components/RoughCircleFrame";
+import { sanitizeHtml } from "@/lib/sanitize";
 
 export const dynamic = "force-dynamic";
 
@@ -71,7 +72,7 @@ export default async function HomePage({
                     )}
                     <div className="mt-6 space-y-5 text-[15px] leading-relaxed text-ink-soft">
                         {paragraphs.map((p, i) => (
-                            <p key={i}>{p}</p>
+                            <p key={i} dangerouslySetInnerHTML={{ __html: sanitizeHtml(p) }} />
                         ))}
                     </div>
                 </section>

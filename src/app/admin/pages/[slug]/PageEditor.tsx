@@ -135,7 +135,9 @@ export function PageEditor({
           </div>
           <div>
             <label className="block text-sm text-ink-soft">
-              Contenu (un paragraphe par ligne vide)
+              Contenu (un paragraphe par ligne vide — balises HTML autorisées :
+              &lt;strong&gt;, &lt;em&gt;, &lt;a href=""&gt;, &lt;br&gt;,
+              &lt;ul&gt;/&lt;li&gt;)
             </label>
             <textarea
               value={current.content}
