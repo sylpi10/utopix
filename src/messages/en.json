@@ -22,5 +22,20 @@
     },
     "footer": {
         "rights": "All rights reserved."
+    },
+    "contact": {
+        "form": {
+            "name": "Name",
+            "email": "Email",
+            "message": "Message",
+            "submit": "Send",
+            "sending": "Sending...",
+            "success": "Thank you, your message has been sent.",
+            "errors": {
+                "missing": "Please fill in all fields.",
+                "invalid-email": "The email address is not valid.",
+                "send-failed": "Something went wrong, please try again later."
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
 import DOMPurify from "isomorphic-dompurify";
+import type { UponSanitizeElementHook } from "dompurify";
 
 // Content is typed by the site owner in the protected /admin, not by public
 // visitors — sanitizing is a safety net, not a defense against a hostile author.
@@ -40,13 +41,14 @@ const IFRAME_SRC_ALLOWLIST = [
   /^https:\/\/(www\.)?youtube(-nocookie)?\.com\/embed\//,
 ];
 
-DOMPurify.addHook("uponSanitizeElement", (node, data) => {
+const removeUnlistedIframes: UponSanitizeElementHook = (node, data) => {
   if (data.tagName !== "iframe") return;
   const src = (node as Element).getAttribute("src") ?? "";
   if (!IFRAME_SRC_ALLOWLIST.some((re) => re.test(src))) {
     node.parentNode?.removeChild(node);
   }
-});
+};
+DOMPurify.addHook("uponSanitizeElement", removeUnlistedIframes);
 
 export function sanitizeHtml(html: string): string {
   return DOMPurify.sanitize(html, { ALLOWED_TAGS, ALLOWED_ATTR });
