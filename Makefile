@@ -24,11 +24,14 @@ deploy:
 	ssh $(SERVER_USER)@$(SERVER_HOST) "\
 		cd $(SERVER_PATH) && \
 		$(SERVER_NODE_ACTIVATE) && \
+		[ -L node_modules ] || rm -rf node_modules && \
+		ln -sfn \$$CL_VIRTUAL_ENV/lib/node_modules node_modules && \
 		npm install --include=dev && \
 		npx prisma generate && \
 		npx prisma migrate deploy && \
 		npm run build:server && \
 		npm prune --omit=dev && \
+		([ -L node_modules ] || rm -rf node_modules && ln -sfn \$$CL_VIRTUAL_ENV/lib/node_modules node_modules) && \
 		mkdir -p tmp && touch tmp/restart.txt \
 	"
 
