@@ -1,19 +1,28 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { usePathname } from "@/i18n/navigation";
 
 const FALLBACK_THRESHOLD = 350;
 
-// The `home-page` class itself is set server-side (see [locale]/layout.tsx)
-// to avoid a flash of the non-home header before this component can run.
-// On the home page only, this toggles a `scrolled` class once the user has
-// scrolled past the `.home-presentation` block, e.g. to switch the
+// [locale]/layout.tsx sets the initial `home-page` class server-side so the
+// very first paint (hard load) is already correct. But that layout is shared
+// across routes, so client-side navigation (<Link>) between the home page
+// and other pages does NOT re-render it — the class would otherwise stay
+// stuck on whatever the first page loaded was. useLayoutEffect re-syncs it
+// on every route change, before the browser paints, so it doesn't flash.
+//
+// On the home page only, this also toggles a `scrolled` class once the user
+// has scrolled past the `.home-presentation` block, e.g. to switch the
 // transparent home header to a solid one:
 // `body.home-page.scrolled .site-header { background: var(--color-paper); }`
 export function BodyClassSync() {
     const pathname = usePathname();
     const isHome = pathname === "/";
+
+    useLayoutEffect(() => {
+        document.body.classList.toggle("home-page", isHome);
+    }, [isHome]);
 
     useEffect(() => {
         if (!isHome) return;
