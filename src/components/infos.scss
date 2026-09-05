@@ -69,8 +69,14 @@ body .article {
                 z-index: 999;
                 position: relative;
                 transition: ease 0.3s;
+                display: grid;
+                align-items: center;
                 &:hover {
                     background-color: var(--color-ochre-dark);
+                }
+                @media (max-width: 768px) {
+                    padding: 10px;
+                    max-height: 70px;
                 }
             }
         }

@@ -106,6 +106,13 @@ body {
             transform: rotate(0.8deg);
             border-radius: 23px 14px / 50px 35px;
             opacity: 0.1;
+            @media (max-width: 768px) {
+                width: calc(100% - 2px);
+                height: 100%;
+                top: 6px;
+                left: 2px;
+                transform: rotate(0.4deg);
+            }
         }
         .content-wrapper {
             .histoire-content {
