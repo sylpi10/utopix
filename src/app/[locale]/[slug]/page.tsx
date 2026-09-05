@@ -35,7 +35,7 @@ export default async function SectionPage({
 
     const isContactPage = slug === "contact";
     const isInfosPage = slug === "infos";
-    const singleImage = (images.length = 1);
+    const singleImage = images.length === 1;
     const oneImage = singleImage ? images[0] : null;
     const contentHtml = renderContentHtml(page.content);
 
@@ -88,15 +88,17 @@ export default async function SectionPage({
                 </div>
             )}
             {isInfosPage ? (
-                <div className="flex justify-center flex-2 mx-auto my-5">
-                    <Image
-                        className="rounded"
-                        src={oneImage.url}
-                        alt={oneImage.alt}
-                        width={200}
-                        height={200}
-                    />
-                </div>
+                oneImage && (
+                    <div className="flex justify-center flex-2 mx-auto my-5">
+                        <Image
+                            className="rounded"
+                            src={oneImage.url}
+                            alt={oneImage.alt}
+                            width={200}
+                            height={200}
+                        />
+                    </div>
+                )
             ) : (
                 images.length > 0 && (
                     <section className="border-b border-line">

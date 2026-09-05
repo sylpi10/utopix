@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:server": "next build --webpack",
     "start": "next start",
+    "start:passenger": "NODE_ENV=production node server.js",
     "lint": "eslint",
     "db:migrate": "prisma migrate dev",
     "db:generate": "prisma generate",
