@@ -115,6 +115,14 @@ body .article {
         }
     }
 
+    .contact-wrapper {
+        iframe {
+            @media (max-width: 768px) {
+                max-width: 360px;
+            }
+        }
+    }
+
     .contact-form {
         display: grid;
         grid-template-columns: 1fr 1fr;
