@@ -30,6 +30,7 @@ export default async function HomePage({
         })) ?? [];
 
     const contentHtml = renderContentHtml(home?.content ?? "");
+    const year = new Date().getFullYear();
 
     return (
         <div className="home-page">
@@ -56,8 +57,8 @@ export default async function HomePage({
             </section>
 
             <div className="mx-auto max-w-3xl px-6 py-4 home-presentation">
-                <p className="rounded-md border border-ochre/30 bg-ochre/10 px-4 py-3 text-center text-sm text-ochre-dark">
-                    {t("home.notice")}
+                <p className="warning px-4 py-3 text-center">
+                    {year}: {t("home.notice")}
                 </p>
             </div>
 

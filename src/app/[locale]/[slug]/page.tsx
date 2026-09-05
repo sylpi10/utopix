@@ -6,7 +6,6 @@ import { Slider } from "@/components/Slider";
 import Image from "next/image";
 import { renderContentHtml } from "@/lib/sanitize";
 import { ContactForm } from "@/components/ContactForm";
-import { log } from "node:console";
 
 export const dynamic = "force-dynamic";
 
@@ -35,6 +34,9 @@ export default async function SectionPage({
     }));
 
     const isContactPage = slug === "contact";
+    const isInfosPage = slug === "infos";
+    const singleImage = (images.length = 1);
+    const oneImage = singleImage ? images[0] : null;
     const contentHtml = renderContentHtml(page.content);
 
     return (
@@ -73,11 +75,11 @@ export default async function SectionPage({
                     <div className="form flex-2 contact">
                         <ContactForm />
                     </div>
-                    {images[0] && (
+                    {oneImage && (
                         <div className="flex justify-center flex-2 m-auto">
                             <Image
-                                src={images[0].url}
-                                alt={images[0].alt}
+                                src={oneImage.url}
+                                alt={oneImage.alt}
                                 width={400}
                                 height={300}
                             />
@@ -85,10 +87,24 @@ export default async function SectionPage({
                     )}
                 </div>
             )}
-            {images.length > 0 && (
-                <section className="border-b border-line">
-                    {slug !== "contact" && <Slider images={images} priority />}
-                </section>
+            {isInfosPage ? (
+                <div className="flex justify-center flex-2 mx-auto my-5">
+                    <Image
+                        className="rounded"
+                        src={oneImage.url}
+                        alt={oneImage.alt}
+                        width={200}
+                        height={200}
+                    />
+                </div>
+            ) : (
+                images.length > 0 && (
+                    <section className="border-b border-line">
+                        {slug !== "contact" && (
+                            <Slider images={images} priority />
+                        )}
+                    </section>
+                )
             )}
         </article>
     );

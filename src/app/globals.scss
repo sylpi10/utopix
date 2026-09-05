@@ -132,15 +132,16 @@ body {
                     grid-template-columns: 1fr;
                 }
             }
-            .warning {
-                background-color: #ff9e99;
-                padding: 14px;
-                border: solid 1px #7a3734;
-                color: #7a3734;
-                font-weight: bold;
-                border-radius: 12px;
-            }
         }
+    }
+
+    .warning {
+        background-color: #ff9e99;
+        padding: 14px;
+        border: solid 1px #7a3734;
+        color: #7a3734;
+        font-weight: bold;
+        border-radius: 12px;
     }
 }
 
