@@ -114,4 +114,15 @@ body .article {
             }
         }
     }
+
+    .contact-form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        // justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        @media (max-width: 920px) {
+            grid-template-columns: 1fr;
+        }
+    }
 }

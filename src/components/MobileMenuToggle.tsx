@@ -6,7 +6,7 @@ export function MobileMenuToggle({ children }: { children: React.ReactNode }) {
     const [open, setOpen] = useState(false);
 
     return (
-        <div className="md:hidden">
+        <div className="lg:hidden">
             <button
                 onClick={() => setOpen((v) => !v)}
                 aria-expanded={open}

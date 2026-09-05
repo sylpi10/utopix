@@ -55,10 +55,10 @@ export default async function SectionPage({
                         dangerouslySetInnerHTML={{ __html: contentHtml }}
                     />
                     {slug === "contact" && (
-                        <div>
+                        <div className="iframe-container">
                             <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2851.2508842892626!2d3.3938878!3d44.3869714!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12b30ac82ad9b933%3A0x4d6a584d0c17c0ea!2sUtopix!5e0!3m2!1sfr!2sfr!4v1788440584293!5m2!1sfr!2sfr"
-                                width="600"
+                                width="400"
                                 height="450"
                                 style={{ border: 0 }}
                                 allowFullScreen
@@ -71,43 +71,41 @@ export default async function SectionPage({
             </div>
 
             {slug === "contact" && (
-                <div className="mx-auto my-8 max-w-6xl flex flex-wrap justify-around gap-8 contact-wrapper align-items-top">
-                    <div className="form flex-2 contact">
+                <div className="contact-form sm:mx-4 md:mx-6 lg:mx-10 my-5 px-6 ">
+                    <div className="form contact">
                         <ContactForm />
                     </div>
                     {oneImage && (
-                        <div className="flex justify-center flex-2 m-auto">
+                        <div className="flex justify-center m-auto">
                             <Image
                                 src={oneImage.url}
                                 alt={oneImage.alt}
-                                width={400}
-                                height={300}
+                                width={360}
+                                height={280}
                             />
                         </div>
                     )}
                 </div>
             )}
-            {isInfosPage ? (
-                oneImage && (
-                    <div className="flex justify-center flex-2 mx-auto my-5">
-                        <Image
-                            className="rounded"
-                            src={oneImage.url}
-                            alt={oneImage.alt}
-                            width={200}
-                            height={200}
-                        />
-                    </div>
-                )
-            ) : (
-                images.length > 0 && (
-                    <section className="border-b border-line">
-                        {slug !== "contact" && (
-                            <Slider images={images} priority />
-                        )}
-                    </section>
-                )
-            )}
+            {isInfosPage
+                ? oneImage && (
+                      <div className="flex justify-center flex-2 mx-auto my-5">
+                          <Image
+                              className="rounded"
+                              src={oneImage.url}
+                              alt={oneImage.alt}
+                              width={200}
+                              height={200}
+                          />
+                      </div>
+                  )
+                : images.length > 0 && (
+                      <section className="border-b border-line">
+                          {slug !== "contact" && (
+                              <Slider images={images} priority />
+                          )}
+                      </section>
+                  )}
         </article>
     );
 }
