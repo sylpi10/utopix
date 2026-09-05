@@ -5,19 +5,15 @@ import { usePathname } from "@/i18n/navigation";
 
 const FALLBACK_THRESHOLD = 350;
 
-// Toggles a `home-page` class on <body> so global CSS (globals.scss) can
-// target the home page specifically, e.g. `body.home-page .site-header { ... }`.
-// On the home page only, also toggles a `scrolled` class once the user has
+// The `home-page` class itself is set server-side (see [locale]/layout.tsx)
+// to avoid a flash of the non-home header before this component can run.
+// On the home page only, this toggles a `scrolled` class once the user has
 // scrolled past the `.home-presentation` block, e.g. to switch the
 // transparent home header to a solid one:
 // `body.home-page.scrolled .site-header { background: var(--color-paper); }`
 export function BodyClassSync() {
     const pathname = usePathname();
     const isHome = pathname === "/";
-
-    useEffect(() => {
-        document.body.classList.toggle("home-page", isHome);
-    }, [isHome]);
 
     useEffect(() => {
         if (!isHome) return;

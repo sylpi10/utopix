@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { headers } from "next/headers";
 import { Patrick_Hand, Inter } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
@@ -42,10 +43,14 @@ export default async function LocaleLayout({
         notFound();
     }
 
+    const headersList = await headers();
+    const pathname = headersList.get("x-pathname") ?? "";
+    const isHome = pathname.replace(new RegExp(`^/${locale}/?`), "") === "";
+
     return (
         <html lang={locale}>
             <body
-                className={`${patrickHand.variable} ${inter.variable} font-sans antialiased`}
+                className={`${patrickHand.variable} ${inter.variable} font-sans antialiased${isHome ? " home-page" : ""}`}
             >
                 <NextIntlClientProvider>
                     {GA_ID && (
