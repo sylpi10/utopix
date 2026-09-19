@@ -1,12 +1,13 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { PAGE_SLUGS } from "@/lib/page-slugs";
+import { getCurrentYear } from "@/lib/pages";
 import logoImg from "./logo-ochre-dark.webp";
 import Image from "next/image";
 
 export async function Footer() {
     const t = await getTranslations();
-    const year = new Date().getFullYear();
+    const year = await getCurrentYear();
 
     return (
         <footer className="border-t border-line bg-paper-dim">

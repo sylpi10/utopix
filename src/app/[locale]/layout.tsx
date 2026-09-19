@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { headers } from "next/headers";
 import { Patrick_Hand, Inter } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { Header } from "@/components/Header";
@@ -24,6 +24,8 @@ const inter = Inter({
     variable: "--font-inter",
 });
 
+const HOME_CLASS_SCRIPT = `if(/^\\/(${routing.locales.join("|")})?\\/?$/.test(location.pathname))document.body.classList.add("home-page")`;
+
 export const metadata: Metadata = {
     metadataBase: new URL("https://utopix-lozere.fr"),
     title: "Utopix — habitation-sculpture en Lozère",
@@ -44,15 +46,21 @@ export default async function LocaleLayout({
         notFound();
     }
 
-    const headersList = await headers();
-    const pathname = headersList.get("x-pathname") ?? "";
-    const isHome = pathname.replace(new RegExp(`^/${locale}/?`), "") === "";
+    setRequestLocale(locale);
 
     return (
         <html lang={locale}>
             <body
-                className={`${patrickHand.variable} ${inter.variable} font-sans antialiased${isHome ? " home-page" : ""}`}
+                className={`${patrickHand.variable} ${inter.variable} font-sans antialiased`}
+                suppressHydrationWarning
             >
+                {/* The layout is statically prerendered and shared by all
+                    routes, so the home-page class can't be set server-side.
+                    This runs before first paint to avoid a header flash;
+                    BodyClassSync keeps it in sync on client navigation. */}
+                <script
+                    dangerouslySetInnerHTML={{ __html: HOME_CLASS_SCRIPT }}
+                />
                 <NextIntlClientProvider>
                     {GA_ID && (
                         <Suspense fallback={null}>

@@ -57,6 +57,6 @@ export async function PUT(
         }),
     ]);
 
-    revalidateTag(PAGES_CACHE_TAG, "max");
+    revalidateTag(PAGES_CACHE_TAG, { expire: 0 });
     return NextResponse.json({ ok: true });
 }

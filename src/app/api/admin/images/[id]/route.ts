@@ -56,7 +56,7 @@ export async function PATCH(
     });
   }
 
-  revalidateTag(PAGES_CACHE_TAG, "max");
+  revalidateTag(PAGES_CACHE_TAG, { expire: 0 });
   return NextResponse.json({ ok: true });
 }
 
@@ -82,6 +82,6 @@ export async function DELETE(
     await unlink(filePath).catch(() => {});
   }
 
-  revalidateTag(PAGES_CACHE_TAG, "max");
+  revalidateTag(PAGES_CACHE_TAG, { expire: 0 });
   return NextResponse.json({ ok: true });
 }

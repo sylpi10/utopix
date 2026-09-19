@@ -5,12 +5,13 @@ import { usePathname } from "@/i18n/navigation";
 
 const FALLBACK_THRESHOLD = 350;
 
-// [locale]/layout.tsx sets the initial `home-page` class server-side so the
-// very first paint (hard load) is already correct. But that layout is shared
-// across routes, so client-side navigation (<Link>) between the home page
-// and other pages does NOT re-render it — the class would otherwise stay
-// stuck on whatever the first page loaded was. useLayoutEffect re-syncs it
-// on every route change, before the browser paints, so it doesn't flash.
+// [locale]/layout.tsx sets the initial `home-page` class with an inline
+// script so the very first paint (hard load) is already correct. But that
+// layout is shared across routes, so client-side navigation (<Link>) between
+// the home page and other pages does NOT re-render it — the class would
+// otherwise stay stuck on whatever the first page loaded was.
+// useLayoutEffect re-syncs it on every route change, before the browser
+// paints, so it doesn't flash.
 //
 // On the home page only, this also toggles a `scrolled` class once the user
 // has scrolled past the `.home-presentation` block, e.g. to switch the

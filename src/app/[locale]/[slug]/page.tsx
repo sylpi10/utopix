@@ -1,17 +1,17 @@
 import { notFound } from "next/navigation";
-import type { Locale } from "@/i18n/routing";
+import { setRequestLocale } from "next-intl/server";
+import { routing, type Locale } from "@/i18n/routing";
 import { getPageBySlug } from "@/lib/pages";
 import { PAGE_SLUGS } from "@/lib/page-slugs";
 import { Slider } from "@/components/Slider";
 import Image from "next/image";
-import { renderContentHtml } from "@/lib/sanitize";
 import { ContactForm } from "@/components/ContactForm";
 import { Metadata } from "next";
 
-export const dynamic = "force-dynamic";
-
 export function generateStaticParams() {
-    return PAGE_SLUGS.map((slug) => ({ slug }));
+    return routing.locales.flatMap((locale) =>
+        PAGE_SLUGS.map((slug) => ({ locale, slug })),
+    );
 }
 
 export async function generateMetadata({
@@ -64,6 +64,7 @@ export default async function SectionPage({
     params: Promise<{ locale: Locale; slug: string }>;
 }) {
     const { locale, slug } = await params;
+    setRequestLocale(locale);
 
     if (!PAGE_SLUGS.includes(slug as (typeof PAGE_SLUGS)[number])) {
         notFound();
@@ -82,7 +83,7 @@ export default async function SectionPage({
     const isInfosPage = slug === "infos";
     const singleImage = images.length === 1;
     const oneImage = singleImage ? images[0] : null;
-    const contentHtml = renderContentHtml(page.content);
+    const contentHtml = page.contentHtml;
 
     return (
         <article className={`${page.slug} article`}>

@@ -1,15 +1,12 @@
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
-import { getPageBySlug, getSectionCards } from "@/lib/pages";
+import { getCurrentYear, getPageBySlug, getSectionCards } from "@/lib/pages";
 import { HOME_SLUG } from "@/lib/page-slugs";
 import { Slider } from "@/components/Slider";
 // import { RoughCircleFrame } from "@/components/RoughCircleFrame";
-import { renderContentHtml } from "@/lib/sanitize";
 import Image from "next/image";
 import type { Metadata } from "next";
-
-export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
     params,
@@ -57,6 +54,7 @@ export default async function HomePage({
     params: Promise<{ locale: Locale }>;
 }) {
     const { locale } = await params;
+    setRequestLocale(locale);
     const t = await getTranslations();
     const [home, cards] = await Promise.all([
         getPageBySlug(HOME_SLUG, locale),
@@ -70,8 +68,8 @@ export default async function HomePage({
             alt: (locale === "fr" ? img.altFr : img.altEn) ?? "",
         })) ?? [];
 
-    const contentHtml = renderContentHtml(home?.content ?? "");
-    const year = new Date().getFullYear();
+    const contentHtml = home?.contentHtml ?? "";
+    const year = await getCurrentYear();
 
     return (
         <div className="home-page">

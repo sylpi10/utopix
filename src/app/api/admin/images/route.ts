@@ -62,6 +62,6 @@ export async function POST(request: Request) {
     },
   });
 
-  revalidateTag(PAGES_CACHE_TAG, "max");
+  revalidateTag(PAGES_CACHE_TAG, { expire: 0 });
   return NextResponse.json({ image });
 }

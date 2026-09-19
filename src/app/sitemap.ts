@@ -3,8 +3,6 @@ import { prisma } from "@/lib/prisma";
 import { routing } from "@/i18n/routing";
 import { HOME_SLUG, PAGE_SLUGS } from "@/lib/page-slugs";
 
-export const dynamic = "force-dynamic";
-
 const BASE_URL = "https://utopix-lozere.fr";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
