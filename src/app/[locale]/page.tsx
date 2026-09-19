@@ -82,6 +82,7 @@ export default async function HomePage({
                             preload
                             fetchPriority="high"
                             sizes="100vw"
+                            quality={70}
                             className="object-cover"
                         />
                     </div>
@@ -143,6 +144,7 @@ export default async function HomePage({
                                     }
                                     width={200}
                                     height={200}
+                                    quality={65}
                                     className="object-cover category-bubble"
                                 />
                                 {/*<RoughCircleFrame
