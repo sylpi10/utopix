@@ -33,9 +33,12 @@ export default async function AdminLayout({
                                 Utopix — Administration
                             </Link>
                             <div className="flex items-center gap-4 text-sm">
-                                <span className="text-ink-soft">
+                                <Link
+                                    href="/admin/account"
+                                    className="text-ink-soft hover:text-ochre"
+                                >
                                     {session.email}
-                                </span>
+                                </Link>
                                 <LogoutButton />
                             </div>
                         </div>

@@ -19,7 +19,15 @@ export default async function AdminDashboard() {
 
   return (
     <div>
-      <h1 className="font-semibold text-xl">Pages du site</h1>
+      <div className="flex items-center justify-between">
+        <h1 className="font-semibold text-xl">Pages du site</h1>
+        <Link
+          href="/admin/account"
+          className="text-sm text-ink-soft underline underline-offset-2 hover:text-ochre"
+        >
+          Mon compte
+        </Link>
+      </div>
       <p className="mt-1 text-sm text-ink-soft">
         Modifie les textes (FR/EN) et les images de chaque section.
       </p>
