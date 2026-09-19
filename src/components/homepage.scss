@@ -149,6 +149,14 @@ $shapes: (
         }
     }
 
+    h1 {
+        display: grid;
+        grid-template-columns: 1fr;
+
+        .main-tagline {
+            font-size: 1.2rem;
+        }
+    }
     h2 {
         font-size: clamp(1.8rem, 3vw, 2.2rem);
         background-color: var(--color-sage);
@@ -215,6 +223,13 @@ $shapes: (
         //             }
         //         }
         //     }
+
+        h1.main-title .main-tagline {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 1.125rem;
+            letter-spacing: 0.08em;
+        }
 
         p.main-subtitle {
             font-size: 0.875rem;

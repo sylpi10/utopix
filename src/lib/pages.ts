@@ -1,9 +1,12 @@
 import { cache } from "react";
+import { unstable_cache } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import type { Locale } from "@/i18n/routing";
 import { PAGE_SLUGS } from "@/lib/page-slugs";
 
-export const getPageBySlug = cache(async (slug: string, locale: Locale) => {
+export const PAGES_CACHE_TAG = "pages";
+
+const fetchPageBySlug = async (slug: string, locale: Locale) => {
     const page = await prisma.page.findUnique({
         where: { slug },
         include: {
@@ -24,9 +27,18 @@ export const getPageBySlug = cache(async (slug: string, locale: Locale) => {
         metaDescription: page.translations[0].metaDescription ?? null,
         metaKeywords: page.translations[0].metaKeywords ?? null,
     };
-});
+};
 
-export async function getSectionCards(locale: Locale) {
+// Cached in the Next data cache until an admin write calls
+// revalidateTag(PAGES_CACHE_TAG). The layout reads request headers, so pages
+// themselves stay dynamic; this avoids hitting the DB on every request.
+export const getPageBySlug = cache(
+    unstable_cache(fetchPageBySlug, ["page-by-slug"], {
+        tags: [PAGES_CACHE_TAG],
+    }),
+);
+
+const fetchSectionCards = async (locale: Locale) => {
     const pages = await prisma.page.findMany({
         where: { slug: { in: [...PAGE_SLUGS] } },
         orderBy: { order: "asc" },
@@ -41,4 +53,10 @@ export async function getSectionCards(locale: Locale) {
         title: page.translations[0]?.title ?? page.slug,
         cover: page.images[0] ?? null,
     }));
-}
+};
+
+export const getSectionCards = unstable_cache(
+    fetchSectionCards,
+    ["section-cards"],
+    { tags: [PAGES_CACHE_TAG] },
+);

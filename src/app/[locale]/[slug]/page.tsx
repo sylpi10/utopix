@@ -32,7 +32,11 @@ export async function generateMetadata({
         keywords: page.metaKeywords ?? undefined,
         alternates: {
             canonical: `/${locale}/${slug}`,
-            languages: { fr: `/fr/${slug}`, en: `/en/${slug}` },
+            languages: {
+                fr: `/fr/${slug}`,
+                en: `/en/${slug}`,
+                "x-default": `/fr/${slug}`,
+            },
         },
         openGraph: {
             title: page.title,

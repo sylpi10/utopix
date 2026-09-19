@@ -15,9 +15,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     return pages.flatMap((page) => {
         const path = page.slug === HOME_SLUG ? "" : `/${page.slug}`;
-        const languages = Object.fromEntries(
-            routing.locales.map((l) => [l, `${BASE_URL}/${l}${path}`]),
-        );
+        const languages = {
+            ...Object.fromEntries(
+                routing.locales.map((l) => [l, `${BASE_URL}/${l}${path}`]),
+            ),
+            "x-default": `${BASE_URL}/${routing.defaultLocale}${path}`,
+        };
         return routing.locales.map((locale) => ({
             url: `${BASE_URL}/${locale}${path}`,
             lastModified: page.updatedAt,

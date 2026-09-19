@@ -29,7 +29,7 @@ export async function generateMetadata({
         keywords: home.metaKeywords ?? undefined,
         alternates: {
             canonical: `/${locale}`,
-            languages: { fr: "/fr", en: "/en" },
+            languages: { fr: "/fr", en: "/en", "x-default": "/fr" },
         },
         openGraph: {
             title: home.title,
@@ -88,6 +88,13 @@ export default async function HomePage({
                 <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center bg-ink/25 px-6 text-center">
                     <h1 className="font-display text-4xl tracking-[0.2em] text-paper main-title">
                         UTOPIX
+                        <span className="main-tagline">
+                            {" "}
+                            {/*{t("home.tagline")}*/}
+                            {t.rich("home.tagline", {
+                                br: () => <br />,
+                            })}
+                        </span>
                     </h1>
                     <p className="mt-4 max-w-md text-sm text-paper/90 md:text-base main-subtitle">
                         {t.rich("common.locationLine", {

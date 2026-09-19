@@ -3,6 +3,8 @@ import { unlink } from "node:fs/promises";
 import path from "node:path";
 import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { revalidateTag } from "next/cache";
+import { PAGES_CACHE_TAG } from "@/lib/pages";
 
 export async function PATCH(
   request: Request,
@@ -54,6 +56,7 @@ export async function PATCH(
     });
   }
 
+  revalidateTag(PAGES_CACHE_TAG, "max");
   return NextResponse.json({ ok: true });
 }
 
@@ -79,5 +82,6 @@ export async function DELETE(
     await unlink(filePath).catch(() => {});
   }
 
+  revalidateTag(PAGES_CACHE_TAG, "max");
   return NextResponse.json({ ok: true });
 }

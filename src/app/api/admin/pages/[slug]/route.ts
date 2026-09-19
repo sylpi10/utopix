@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { revalidateTag } from "next/cache";
+import { PAGES_CACHE_TAG } from "@/lib/pages";
 
 export async function PUT(
     request: Request,
@@ -55,5 +57,6 @@ export async function PUT(
         }),
     ]);
 
+    revalidateTag(PAGES_CACHE_TAG, "max");
     return NextResponse.json({ ok: true });
 }

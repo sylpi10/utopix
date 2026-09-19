@@ -4,6 +4,8 @@ import path from "node:path";
 import { randomUUID } from "node:crypto";
 import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { revalidateTag } from "next/cache";
+import { PAGES_CACHE_TAG } from "@/lib/pages";
 
 const ALLOWED_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
 const MAX_SIZE = 8 * 1024 * 1024;
@@ -60,5 +62,6 @@ export async function POST(request: Request) {
     },
   });
 
+  revalidateTag(PAGES_CACHE_TAG, "max");
   return NextResponse.json({ image });
 }
