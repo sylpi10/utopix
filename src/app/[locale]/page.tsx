@@ -3,7 +3,6 @@ import type { Locale } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
 import { getCurrentYear, getPageBySlug, getSectionCards } from "@/lib/pages";
 import { HOME_SLUG } from "@/lib/page-slugs";
-import { Slider } from "@/components/Slider";
 // import { RoughCircleFrame } from "@/components/RoughCircleFrame";
 import Image from "next/image";
 import type { Metadata } from "next";
@@ -61,12 +60,11 @@ export default async function HomePage({
         getSectionCards(locale),
     ]);
 
-    const heroImages =
-        home?.images.map((img) => ({
-            id: img.id,
-            url: img.url,
-            alt: (locale === "fr" ? img.altFr : img.altEn) ?? "",
-        })) ?? [];
+    const heroImage = home?.images[0];
+    const hero = heroImage && {
+        url: heroImage.url,
+        alt: (locale === "fr" ? heroImage.altFr : heroImage.altEn) ?? "",
+    };
 
     const contentHtml = home?.contentHtml ?? "";
     const year = await getCurrentYear();
@@ -74,12 +72,19 @@ export default async function HomePage({
     return (
         <div className="home-page">
             <section className="main-section relative">
-                {heroImages.length > 0 ? (
-                    <Slider
-                        images={heroImages}
-                        priority
-                        eagerCount={heroImages.length}
-                    />
+                {hero ? (
+                    // image unique sans slider avec fetchpriority high
+                    <div className="relative h-screen w-full bg-ink/10">
+                        <Image
+                            src={hero.url}
+                            alt={hero.alt}
+                            fill
+                            preload
+                            fetchPriority="high"
+                            sizes="100vw"
+                            className="object-cover"
+                        />
+                    </div>
                 ) : (
                     <div className="aspect-[4/3] w-full bg-paper-dim md:aspect-[16/9]" />
                 )}
