@@ -6,11 +6,52 @@ import { Slider } from "@/components/Slider";
 import Image from "next/image";
 import { renderContentHtml } from "@/lib/sanitize";
 import { ContactForm } from "@/components/ContactForm";
+import { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
 
 export function generateStaticParams() {
     return PAGE_SLUGS.map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ locale: Locale; slug: string }>;
+}): Promise<Metadata> {
+    const { locale, slug } = await params;
+    const page = await getPageBySlug(slug, locale);
+    if (!page) return {};
+
+    const cover = page.images[0];
+    const description = page.metaDescription ?? undefined;
+
+    return {
+        title: page.title,
+        description,
+        keywords: page.metaKeywords ?? undefined,
+        alternates: {
+            canonical: `/${locale}/${slug}`,
+            languages: { fr: `/fr/${slug}`, en: `/en/${slug}` },
+        },
+        openGraph: {
+            title: page.title,
+            description,
+            images: cover
+                ? [
+                      {
+                          url: cover.url,
+                          alt:
+                              (locale === "fr" ? cover.altFr : cover.altEn) ??
+                              page.title,
+                      },
+                  ]
+                : [],
+            siteName: "Utopix-Lozere.fr",
+            locale: locale === "fr" ? "fr_FR" : "en_US",
+            type: "website",
+        },
+    };
 }
 
 export default async function SectionPage({

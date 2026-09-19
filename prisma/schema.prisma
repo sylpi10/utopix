@@ -2,55 +2,57 @@
 // Content (texts + slider images) lives in the DB and is edited via /admin.
 
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+    provider = "prisma-client"
+    output   = "../src/generated/prisma"
 }
 
 datasource db {
-  provider = "mysql"
+    provider = "mysql"
 }
 
 // One row per section of the site (home, histoire, construction, ...).
 // `slug` is the stable key used in code/routes; `order` drives nav ordering.
 model Page {
-  id           Int              @id @default(autoincrement())
-  slug         String           @unique
-  order        Int              @default(0)
-  translations PageTranslation[]
-  images       PageImage[]
-  createdAt    DateTime         @default(now())
-  updatedAt    DateTime         @updatedAt
+    id           Int               @id @default(autoincrement())
+    slug         String            @unique
+    order        Int               @default(0)
+    translations PageTranslation[]
+    images       PageImage[]
+    createdAt    DateTime          @default(now())
+    updatedAt    DateTime          @updatedAt
 }
 
 // Bilingual text content for a page. One row per (page, locale).
 model PageTranslation {
-  id      Int    @id @default(autoincrement())
-  pageId  Int
-  page    Page   @relation(fields: [pageId], references: [id], onDelete: Cascade)
-  locale  String // "fr" | "en"
-  title   String
-  content String @db.Text
+    id              Int     @id @default(autoincrement())
+    pageId          Int
+    page            Page    @relation(fields: [pageId], references: [id], onDelete: Cascade)
+    locale          String // "fr" | "en"
+    title           String
+    content         String  @db.Text
+    metaKeywords    String? @db.Text
+    metaDescription String? @db.Text
 
-  @@unique([pageId, locale])
+    @@unique([pageId, locale])
 }
 
 // Slider / gallery images attached to a page, in display order.
 model PageImage {
-  id        Int      @id @default(autoincrement())
-  pageId    Int
-  page      Page     @relation(fields: [pageId], references: [id], onDelete: Cascade)
-  url       String
-  altFr     String?
-  altEn     String?
-  order     Int      @default(0)
-  createdAt DateTime @default(now())
+    id        Int      @id @default(autoincrement())
+    pageId    Int
+    page      Page     @relation(fields: [pageId], references: [id], onDelete: Cascade)
+    url       String
+    altFr     String?
+    altEn     String?
+    order     Int      @default(0)
+    createdAt DateTime @default(now())
 
-  @@index([pageId, order])
+    @@index([pageId, order])
 }
 
 model AdminUser {
-  id           Int      @id @default(autoincrement())
-  email        String   @unique
-  passwordHash String
-  createdAt    DateTime @default(now())
+    id           Int      @id @default(autoincrement())
+    email        String   @unique
+    passwordHash String
+    createdAt    DateTime @default(now())
 }

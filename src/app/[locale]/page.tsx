@@ -4,11 +4,52 @@ import { Link } from "@/i18n/navigation";
 import { getPageBySlug, getSectionCards } from "@/lib/pages";
 import { HOME_SLUG } from "@/lib/page-slugs";
 import { Slider } from "@/components/Slider";
-import { RoughCircleFrame } from "@/components/RoughCircleFrame";
+// import { RoughCircleFrame } from "@/components/RoughCircleFrame";
 import { renderContentHtml } from "@/lib/sanitize";
 import Image from "next/image";
+import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ locale: Locale }>;
+}): Promise<Metadata> {
+    const { locale } = await params;
+    const home = await getPageBySlug(HOME_SLUG, locale);
+    if (!home) return {};
+
+    const cover = home.images[0];
+    const description = home.metaDescription ?? undefined;
+
+    return {
+        title: home.title,
+        description,
+        keywords: home.metaKeywords ?? undefined,
+        alternates: {
+            canonical: `/${locale}`,
+            languages: { fr: "/fr", en: "/en" },
+        },
+        openGraph: {
+            title: home.title,
+            description,
+            images: cover
+                ? [
+                      {
+                          url: cover.url,
+                          alt:
+                              (locale === "fr" ? cover.altFr : cover.altEn) ??
+                              home.title,
+                      },
+                  ]
+                : [],
+            siteName: "Utopix-Lozere.fr",
+            locale: locale === "fr" ? "fr_FR" : "en_US",
+            type: "website",
+        },
+    };
+}
 
 export default async function HomePage({
     params,
