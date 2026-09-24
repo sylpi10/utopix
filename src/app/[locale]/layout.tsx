@@ -28,7 +28,10 @@ const HOME_CLASS_SCRIPT = `if(/^\\/(${routing.locales.join("|")})?\\/?$/.test(lo
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://utopix-lozere.fr"),
-    title: "Utopix — habitation-sculpture en Lozère",
+    title: {
+        template: "%s | Utopix",
+        default: "Utopix — habitation-sculpture en Lozère",
+    },
     description:
         "Utopix, une habitation-sculpture et ses espaces d'exposition à Sainte-Énimie, sur le Causse de Sauveterre, en Lozère.",
 };
