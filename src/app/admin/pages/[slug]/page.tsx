@@ -1,7 +1,7 @@
 import { redirect, notFound } from "next/navigation";
 import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { PAGE_SLUGS, HOME_SLUG } from "@/lib/page-slugs";
+import { CONTENT_SLUGS, HOME_SLUG } from "@/lib/page-slugs";
 import { PageEditor } from "./PageEditor";
 
 export default async function AdminEditPage({
@@ -13,7 +13,7 @@ export default async function AdminEditPage({
     if (!session) redirect("/admin/login");
 
     const { slug } = await params;
-    const validSlugs: string[] = [HOME_SLUG, ...PAGE_SLUGS];
+    const validSlugs: string[] = [HOME_SLUG, ...CONTENT_SLUGS];
     if (!validSlugs.includes(slug)) notFound();
 
     const page = await prisma.page.findUnique({

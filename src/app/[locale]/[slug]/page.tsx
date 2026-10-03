@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { routing, type Locale } from "@/i18n/routing";
 import { getPageBySlug } from "@/lib/pages";
-import { PAGE_SLUGS } from "@/lib/page-slugs";
+import { CONTENT_SLUGS } from "@/lib/page-slugs";
 import { Slider } from "@/components/Slider";
 import Image from "next/image";
 import { ContactForm } from "@/components/ContactForm";
@@ -10,7 +10,7 @@ import { Metadata } from "next";
 
 export function generateStaticParams() {
     return routing.locales.flatMap((locale) =>
-        PAGE_SLUGS.map((slug) => ({ locale, slug })),
+        CONTENT_SLUGS.map((slug) => ({ locale, slug })),
     );
 }
 
@@ -66,7 +66,7 @@ export default async function SectionPage({
     const { locale, slug } = await params;
     setRequestLocale(locale);
 
-    if (!PAGE_SLUGS.includes(slug as (typeof PAGE_SLUGS)[number])) {
+    if (!CONTENT_SLUGS.includes(slug as (typeof CONTENT_SLUGS)[number])) {
         notFound();
     }
 

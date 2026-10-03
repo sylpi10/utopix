@@ -1,13 +1,13 @@
 import type { MetadataRoute } from "next";
 import { prisma } from "@/lib/prisma";
 import { routing } from "@/i18n/routing";
-import { HOME_SLUG, PAGE_SLUGS } from "@/lib/page-slugs";
+import { CONTENT_SLUGS, HOME_SLUG } from "@/lib/page-slugs";
 
 const BASE_URL = "https://utopix-lozere.fr";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const pages = await prisma.page.findMany({
-        where: { slug: { in: [HOME_SLUG, ...PAGE_SLUGS] } },
+        where: { slug: { in: [HOME_SLUG, ...CONTENT_SLUGS] } },
         select: { slug: true, updatedAt: true },
     });
 

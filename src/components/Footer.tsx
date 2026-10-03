@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { PAGE_SLUGS } from "@/lib/page-slugs";
+import { LEGAL_SLUGS, PAGE_SLUGS } from "@/lib/page-slugs";
 import { getCurrentYear } from "@/lib/pages";
 import logoImg from "./logo-ochre-dark.webp";
 import Image from "next/image";
@@ -47,6 +47,17 @@ export async function Footer() {
                         Syl Pi
                     </Link>{" "}
                     — {t("footer.rights")}
+                    {LEGAL_SLUGS.map((slug) => (
+                        <span key={slug}>
+                            {" · "}
+                            <Link
+                                href={`/${slug}`}
+                                className="transition-colors hover:text-ochre"
+                            >
+                                {t(`footer.${slug}`)}
+                            </Link>
+                        </span>
+                    ))}
                 </div>
             </div>
         </footer>

@@ -2,14 +2,14 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { PAGE_SLUGS, HOME_SLUG } from "@/lib/page-slugs";
+import { CONTENT_SLUGS, HOME_SLUG } from "@/lib/page-slugs";
 
 export default async function AdminDashboard() {
   const session = await getSession();
   if (!session) redirect("/admin/login");
 
   const pages = await prisma.page.findMany({
-    where: { slug: { in: [HOME_SLUG, ...PAGE_SLUGS] } },
+    where: { slug: { in: [HOME_SLUG, ...CONTENT_SLUGS] } },
     include: {
       translations: true,
       _count: { select: { images: true } },

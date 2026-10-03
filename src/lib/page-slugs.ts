@@ -14,3 +14,11 @@ export const PAGE_SLUGS = [
 export type PageSlug = (typeof PAGE_SLUGS)[number];
 
 export const HOME_SLUG = "home" as const;
+
+// Pages reachable only from the footer (not in the main nav or home cards).
+export const LEGAL_SLUGS = ["mentions-legales"] as const;
+
+export type LegalSlug = (typeof LEGAL_SLUGS)[number];
+
+// Every slug served by the [slug] route.
+export const CONTENT_SLUGS = [...PAGE_SLUGS, ...LEGAL_SLUGS] as const;
