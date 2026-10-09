@@ -20,7 +20,7 @@ export function LanguageSwitch() {
             href={`/${locale}${rest ? `/${rest}` : ""}`}
             className={
               locale === currentLocale
-                ? "font-semibold text-ochre"
+                ? "font-semibold text-ochre-dark"
                 : "text-ink-soft hover:text-ink transition-colors"
             }
           >

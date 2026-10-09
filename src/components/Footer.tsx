@@ -41,7 +41,7 @@ export async function Footer() {
                         ))}
                     </nav>
                 </div>
-                <div className="mt-10 gap4 text-xs text-ink-soft/70">
+                <div className="mt-10 gap4 text-xs text-ink-soft">
                     <span>© {year} </span>
                     <Link target="_blank" href="https://sylvainpillet.com">
                         Syl Pi

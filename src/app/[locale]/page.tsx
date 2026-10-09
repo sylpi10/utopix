@@ -140,7 +140,7 @@ export default async function HomePage({
                                     alt={
                                         (locale === "fr"
                                             ? card.cover.altFr
-                                            : card.cover.altEn) ?? card.title
+                                            : card.cover.altEn) ?? ""
                                     }
                                     width={200}
                                     height={200}

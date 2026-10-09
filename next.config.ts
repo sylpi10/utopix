@@ -40,6 +40,10 @@ const nextConfig: NextConfig = {
     inlineCss: true,
   },
   images: {
+    // AVIF first (~20-30% lighter than WebP), WebP as fallback.
+    formats: ["image/avif", "image/webp"],
+    // Next 16 only allows [75] by default: other `quality` props are coerced to 75.
+    qualities: [65, 70, 75],
     remotePatterns: [],
   },
   async redirects() {
